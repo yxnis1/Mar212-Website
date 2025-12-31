@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mar212 Roleplay | Join the Elite</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <h1>MAR212</h1>
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#gangs">Gangs</a>
+            <a href="#garage">Garage</a>
+            <a href="https://discord.gg/heMmNT6U" target="_blank">Join Discord</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Official FiveM Server</span>
+            <h1>Rule The <br> Streets</h1>
+            <p>Experience the most immersive roleplay server in Morocco. Custom cars, elite gangs, and a thriving
+                economy waiting for you.</p>
+            <a href="#" class="btn-primary" onclick="connectToServer(); return false;">Connect Now</a>
+        </div>
+    </header>
+
+    <section id="gangs" class="action-banner">
+        <h2>Gang Warfare</h2>
+        <p>Join the brotherhood. Green and black Nike hoodies, masks, and tactical operations. Choose your allegiance
+            wisely.</p>
+
+        <div class="gang-grid">
+            <div class="gang-card">
+                <div class="gang-name">Ktama</div>
+                <p>Ruthless efficiency. Territory control specialists.</p>
+            </div>
+
+            <div class="gang-card">
+                <div class="gang-name">Brahim Ta7ta7a</div>
+                <p>Street soldiers. Respect is earned, not given.</p>
+            </div>
+
+            <div class="gang-card gang-exclusive">
+                <div class="badge badge-gold">EXCLUSIVE</div>
+                <div class="gang-name">Boali</div>
+                <p>The elite. Custom missions, exclusive vehicle access, and high-stakes operations.</p>
+                <br>
+                <a href="https://discord.gg/heMmNT6U" target="_blank" class="btn-secondary"
+                    style="font-size: 0.8rem;">Apply via Discord</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="garage" class="showcase">
+        <div class="section-title">
+            Elite <span>Garage</span>
+        </div>
+
+        <div class="brand-grid" id="brandGrid">
+            <!-- Brands injected via JS -->
+        </div>
+
+        <div id="carContainer" class="car-grid">
+            <!-- Cars injected via JS -->
+            <div style="grid-column: 1 / -1; text-align: center; color: #666; padding: 50px;">
+                Select a brand to view vehicles
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Mar212 Roleplay. All rights reserved.</p>
+    </footer>
+
+    <!-- Connection Modal -->
+    <div id="connectModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Connecting to Mar212...</h3>
+            <p>We are attempting to launch FiveM. If nothing happens, you likely don't have FiveM installed or it was
+                blocked.</p>
+
+            <p style="color: var(--primary); font-weight: bold;">Step 1: Join Discord (Required for Instructions)</p>
+            <div class="modal-actions" style="margin-bottom: 20px; margin-top: 10px;">
+                <a href="https://discord.gg/heMmNT6U" target="_blank" class="btn-secondary"
+                    style="border-color: var(--primary); color: var(--primary);">Join Discord</a>
+            </div>
+
+            <p>Step 2: Have FiveM? Direct Connect IP:</p>
+            <div class="server-ip">whole-depth.gl.at.ply.gg:51991</div>
+
+            <p>Step 3: Don't have FiveM?</p>
+            <div class="modal-actions">
+                <a href="https://fivem.net/" target="_blank" class="btn-secondary">Download FiveM</a>
+                <a href="fivem://connect/whole-depth.gl.at.ply.gg:51991" class="btn-secondary">Try Connect Again</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Car Data ---
+        const carData = {
+            "Mercedes": [
+                { name: "Mercedes C63 AMG", price: 360000, img: "https://i.ibb.co/JFHL6LnY/mbc63.jpg", stats: { speed: 290, acc: 90 } },
+                { name: "Mercedes C63 (W205)", price: 285000, img: "https://i.ibb.co/7tQdLRrz/MercedesBenzC63-c63w205.webp", stats: { speed: 280, acc: 90 } },
+                { name: "Mercedes S500", price: 2500000, img: "https://i.ibb.co/TxcHqb4S/SclassMaybach.png", stats: { speed: 250, acc: 88 } },
+                { name: "Mercedes G63 AMG 6x6", price: 990000, img: "https://i.ibb.co/mF6h6my9/g63amg6x6.jpg", stats: { speed: 160, acc: 75 } },
+                { name: "Mercedes G63 Mansory", price: 899000, img: "https://i.ibb.co/HpTSTv87/gclassMansory.jpg", stats: { speed: 240, acc: 86 } },
+                { name: "Mercedes G-Class Brabus", price: 899000, img: "https://i.ibb.co/qLVtnJ7c/gclssbrabus.png", stats: { speed: 240, acc: 86 } },
+                { name: "Mercedes SLS AMG", price: 1200000, img: "https://i.ibb.co/fzB4cfBD/msls.jpg", stats: { speed: 317, acc: 96 } },
+                { name: "Mercedes SL65 Black Series", price: 290000, img: "https://i.ibb.co/CpMYMyBw/sl65bs.jpg", stats: { speed: 320, acc: 93 } },
+                { name: "Mercedes SL63 AMG 2022", price: 875000, img: "https://i.ibb.co/hxGNZBs8/sl63amg22.png", stats: { speed: 315, acc: 95 } },
+                { name: "Mercedes GLE Larte", price: 850000, img: "https://i.ibb.co/xqZ9tfYQ/mercedes-benzgle63amg.webp", stats: { speed: 170, acc: 88 } },
+                { name: "Mercedes GLE 53", price: 500000, img: "https://i.ibb.co/pvKDT2tB/gle53.jpg", stats: { speed: 350, acc: 99 } },
+                { name: "Mercedes E63S", price: 350000, img: "https://i.ibb.co/S4xWKvdh/e63sf.jpg", stats: { speed: 300, acc: 92 } },
+                { name: "Mercedes E500 W124", price: 385000, img: "https://i.ibb.co/0j383NxB/w124E500-e500.webp", stats: { speed: 250, acc: 82 } },
+                { name: "Mercedes 190E", price: 500000, img: "https://i.ibb.co/Nd1w7s0Y/190e.webp", stats: { speed: 230, acc: 78 } },
+                { name: "Mercedes V-Class", price: 350000, img: "https://i.ibb.co/JwfzgMct/vclass.JPG", stats: { speed: 210, acc: 75 } },
+                { name: "Mercedes CLS 2015", price: 250000, img: "https://i.ibb.co/bg482CNw/cls2015.jpg", stats: { speed: 250, acc: 85 } },
+                { name: "Mercedes GT-Class", price: 780000, img: "https://i.ibb.co/QFnQ6Pyn/a01b3c-y80.webp", stats: { speed: 320, acc: 92 } },
+            ],
+            "BMW": [
+                { name: "BMW M8 Competition", price: 850000, img: "https://ibb.co/C3fmwC7g/bmwm8.png", stats: { speed: 190, acc: 92 } },
+                { name: "BMW X7", price: 448000, img: "https://i.ibb.co/sJXwx1Vx/mobm23.jpg", stats: { speed: 290, acc: 93 } },
+                { name: "BMW M4 CS", price: 400000, img: "https://i.ibb.co/XxmKvyvR/M4LCI.png", stats: { speed: 305, acc: 94 } },
+                { name: "BMW M5", price: 520000, img: "https://i.ibb.co/15zSLvj/bmci.jpg", stats: { speed: 305, acc: 93 } },
+                { name: "BMW M3 G80", price: 520000, img: "https://i.ibb.co/G3sGmrVs/m3g80.jpg", stats: { speed: 290, acc: 92 } },
+                { name: "BMW S1000RR", price: 480000, img: "https://i.ibb.co/mrqhqKGh/s1000sec.png", stats: { speed: 299, acc: 95 } },
+                { name: "BMW R1200", price: 900000, img: "https://i.ibb.co/B2WB4WH4/BMW-R1200.png", stats: { speed: 200, acc: 87 } },
+            ],
+            "Audi": [
+                { name: "Audi RS3", price: 430000, img: "https://i.ibb.co/3YjYcR7K/RS3AUDI-tw-ar3sb.webp", stats: { speed: 290, acc: 89 } },
+                { name: "Audi RS6 ABT", price: 850000, img: "https://i.ibb.co/N23rLRZq/rs6.jpg", stats: { speed: 305, acc: 93 } },
+                { name: "Audi Q5", price: 200000, img: "https://i.ibb.co/TMF4PmvH/audi-q5.png", stats: { speed: 230, acc: 85 } },
+                { name: "Audi R8", price: 520000, img: "https://i.ibb.co/mrXgdsNR/audriR8-r820.webp", stats: { speed: 290, acc: 95 } },
+            ],
+            "Toyota / Lexus": [
+                { name: "Toyota Supra A80", price: 240000, img: "https://i.ibb.co/F4YtfnFV/a80.jpg", stats: { speed: 250, acc: 85 } },
+                { name: "Toyota Supra (Modern)", price: 400000, img: "https://images.unsplash.com/photo-1599818826720-d3840787a226?q=80&w=600&auto=format&fit=crop", stats: { speed: 280, acc: 90 } },
+                { name: "Toyota Camry", price: 180000, img: "https://i.ibb.co/YTXw7fdW/camry55.png", stats: { speed: 230, acc: 77 } },
+                { name: "Toyota Land Cruiser 200", price: 430000, img: "https://i.ibb.co/nMX1K6bc/sclkuz.jpg", stats: { speed: 210, acc: 78 } },
+                { name: "Toyota Alphard", price: 300000, img: "https://i.ibb.co/Y47fYDss/al18.jpg", stats: { speed: 180, acc: 72 } },
+                { name: "Lexus LX570", price: 390000, img: "https://i.ibb.co/q4YtdX4/lx2018.jpg", stats: { speed: 220, acc: 82 } },
+                { name: "Lexus LFA (Coming Soon)", price: 1500000, img: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Lexus_LFA_N%C3%BCrburgring_Package_white_vr.jpg", stats: { speed: 325, acc: 95 } },
+            ],
+            "Ferrari": [
+                { name: "Ferrari F12 TDF", price: 960000, img: "https://i.ibb.co/Q3PVYYbs/tdf.jpg", stats: { speed: 340, acc: 98 } },
+                { name: "Ferrari Italia", price: 950000, img: "https://i.ibb.co/gF9D6CsW/ferrariItalya.jpg", stats: { speed: 340, acc: 97 } },
+                { name: "Ferrari Purosangue", price: 1500000, img: "https://i.ibb.co/VWX5nDbd/puros.jpeg", stats: { speed: 320, acc: 94 } },
+            ],
+            "Lamborghini": [
+                { name: "Lamborghini Aventador", price: 1500000, img: "https://i.ibb.co/RpWkph16/lrev.jpg", stats: { speed: 350, acc: 99 } },
+                { name: "Lamborghini Urus", price: 1200000, img: "https://i.ibb.co/bgvP2gMk/venatusc.png", stats: { speed: 305, acc: 92 } },
+                { name: "Lamborghini Huracan Perf.", price: 930000, img: "https://i.ibb.co/FkGNgM7q/lambo.jpg", stats: { speed: 345, acc: 98 } },
+            ],
+            "Motorcycles": [
+                { name: "Kawasaki Ninja H2", price: 250000, img: "https://i.ibb.co/1ffYvk3v/ninjah2.png", stats: { speed: 400, acc: 99 } },
+                { name: "Yamaha TMAX", price: 90000, img: "https://i.ibb.co/GQgM1Rch/tmax530-tmaxdx.jpg", stats: { speed: 180, acc: 82 } },
+                { name: "Honda SH150", price: 125000, img: "https://drive.google.com/thumbnail?id=1gDPTWDYCQ6XdFgFNB4VqRpBtIAuVvbV2", stats: { speed: 80, acc: 65 } },
+                { name: "Zip 2000", price: 100, img: "https://i.ibb.co/qMSR7D94/zip2000.webp", stats: { speed: 80, acc: 65 } },
+            ],
+            "Hypercars": [
+                { name: "Bugatti Bolide", price: 4500000, img: "https://i.ibb.co/4RGzLPzx/bolide.png", stats: { speed: 500, acc: 100 } },
+                { name: "Bugatti Chiron", price: 10000000, img: "https://i.ibb.co/gMdBxttg/bugatti-Chiron-chiron17.webp", stats: { speed: 300, acc: 100 } },
+                { name: "Koenigsegg Jesko", price: 5000000, img: "https://i.ibb.co/GvzmSxfF/jesko.png", stats: { speed: 483, acc: 99 } },
+                { name: "McLaren P1", price: 1350000, img: "https://i.ibb.co/YTQ64f3x/mclarenP1.jpg", stats: { speed: 350, acc: 99 } },
+            ],
+            "American": [
+                { name: "Tesla Model S Plaid", price: 200000, img: "https://i.ibb.co/1YHHrZh9/teslapd.jpg", stats: { speed: 322, acc: 100 } },
+                { name: "Tesla Cybertruck", price: 200000, img: "https://i.ibb.co/HpDhK9RF/CyberTruckV.png", stats: { speed: 210, acc: 95 } },
+                { name: "Dodge Challenger Redeye", price: 420000, img: "https://i.ibb.co/QFv1JBYS/redeye.jpg", stats: { speed: 327, acc: 96 } },
+                { name: "Ford Mustang", price: 320000, img: "https://i.ibb.co/C38rrY2T/mustang.jpg", stats: { speed: 280, acc: 87 } },
+                { name: "Ford Raptor", price: 800000, img: "https://i.ibb.co/7xW9yYjm/19raptor.jpg", stats: { speed: 190, acc: 88 } },
+                { name: "Dodge Ram TRX", price: 800000, img: "https://i.ibb.co/6JZfgP2d/dodgeram.png", stats: { speed: 190, acc: 88 } },
+                { name: "Chevrolet Corvette C8", price: 520000, img: "https://i.ibb.co/27TKmBy4/adc8.jpg", stats: { speed: 305, acc: 93 } },
+            ],
+            "Others": [
+                { name: "VW Golf 7.5 R", price: 455000, img: "https://i.ibb.co/QF6Hdy4k/vwGTI8-vwgti23.webp", stats: { speed: 265, acc: 88 } },
+                { name: "Porsche 911 Turbo S", price: 750000, img: "https://i.ibb.co/PGbvvswr/911PorscheTurboS-aa-pr911-992-21.webp", stats: { speed: 240, acc: 95 } },
+                { name: "Porsche Macan", price: 410000, img: "https://i.ibb.co/SXrsxgXN/macanpd600m.jpg", stats: { speed: 270, acc: 90 } },
+                { name: "Nissan GTR R35", price: 620000, img: "https://i.ibb.co/Zp0pMhZ3/NissanGTR-R35.webp", stats: { speed: 315, acc: 95 } },
+                { name: "Aston Martin DBX", price: 870000, img: "https://i.ibb.co/gMhP4z5Z/dbx.jpg", stats: { speed: 291, acc: 89 } },
+                { name: "Range Rover Velar", price: 320000, img: "https://i.ibb.co/chKCtNB0/RangeRoverVelar-18Velar.webp", stats: { speed: 250, acc: 85 } },
+            ]
+        };
+
+        // Initialize Brands
+        const brandGrid = document.getElementById('brandGrid');
+        const carContainer = document.getElementById('carContainer');
+        const allBrands = Object.keys(carData);
+
+        // Populate Brand Logos (Text for now, styled)
+        allBrands.forEach(brand => {
+            const div = document.createElement('div');
+            div.className = 'brand-card';
+            div.innerHTML = `<h4>${brand}</h4>`;
+            div.onclick = () => showCars(brand, div);
+            brandGrid.appendChild(div);
+        });
+
+        // Function to show cars
+        function showCars(brand, tabElement) {
+            // Active Tab UI
+            document.querySelectorAll('.brand-card').forEach(el => el.classList.remove('active'));
+            tabElement.classList.add('active');
+
+            // Clear container
+            carContainer.innerHTML = '';
+
+            const cars = carData[brand];
+            cars.forEach(car => {
+                const carDiv = document.createElement('div');
+                carDiv.className = 'car-item';
+                carDiv.innerHTML = `
+                    <img src="${car.img}" alt="${car.name}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image';">
+                    <div class="car-info">
+                        <h5>${car.name}</h5>
+                        <p class="car-price">$${car.price.toLocaleString()}</p>
+                        <div class="car-stats">
+                            <span>Top Speed: ${car.stats.speed} km/h</span>
+                            <span>Acc: ${car.stats.acc}/100</span>
+                        </div>
+                    </div>
+                `;
+                carContainer.appendChild(carDiv);
+            });
+        }
+
+        // Connect Modal Logic
+        function connectToServer() {
+            window.location.href = 'fivem://connect/whole-depth.gl.at.ply.gg:51991';
+            document.getElementById('connectModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('connectModal').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            var modal = document.getElementById('connectModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Load Mercedes by default
+        setTimeout(() => {
+            const firstBrand = document.querySelector('.brand-card');
+            if (firstBrand) firstBrand.click();
+        }, 100);
+
+    </script>
+
+</body>
+
+</html>
